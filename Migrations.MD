@@ -1,0 +1,2 @@
+dotnet ef migrations add InitialCreatePayment --project Payment/Payment.Data --startup-project Payment/Payment.Api
+dotnet ef database update --project Payment/Payment.Data --startup-project Payment/Payment.Api
