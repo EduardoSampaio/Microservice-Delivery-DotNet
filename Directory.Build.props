@@ -5,6 +5,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>$(SolutionDir)build\$(Configuration)\</OutputPath>
     <Deterministic>true</Deterministic>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
