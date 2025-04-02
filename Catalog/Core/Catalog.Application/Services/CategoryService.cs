@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Exceptions;
+using BuildingBlocks.Wrappers.http;
 using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
 using Catalog.Entities;
@@ -8,36 +9,45 @@ namespace Catalog.Application.Services;
 
 public class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
-    public async Task Create(CreateCategoryDto categoryDto)
+    public async Task<IResponseWrapper> Create(CreateCategoryDto categoryDto)
     {
         var entity = categoryDto.Adapt<Category>();
         await categoryRepository.Create(entity);
+        return await ResponseWrapper.SuccessAsync();
     }
 
 
-    public async Task Delete(int id)
+    public async Task<IResponseWrapper> Delete(int id)
     {
         var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException();
 
         await categoryRepository.Delete(entity);
+
+        return await ResponseWrapper.SuccessAsync();
     }
 
-    public async Task<IEnumerable<CategoryDto>> GetCategories()
+    public async Task<IResponseWrapper> GetCategories()
     {
         var entities = await categoryRepository.GetCategories();
 
-        return entities.Adapt<IEnumerable<CategoryDto>>();
+        var dtos = entities.Adapt<IEnumerable<CategoryDto>>();
+        return await ResponseWrapper<IEnumerable<CategoryDto>>.SuccessAsync(data: dtos);
     }
-    public async Task<CategoryDto?> GetCategoryById(int id)
+    public async Task<IResponseWrapper> GetCategoryById(int id)
     {
         var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException();
 
-        return entity.Adapt<CategoryDto>();
+        var dto = entity.Adapt<CategoryDto>();
+        return await ResponseWrapper<CategoryDto>.SuccessAsync(data: dto);
     }
-    public Task Update(CategoryDto categoryDto)
+    public async Task<IResponseWrapper> Update(CategoryDto categoryDto)
     {
-        var entity = categoryDto.Adapt<Category>();
-        categoryRepository.Update(entity);
-        return Task.CompletedTask;
+        var entity = await categoryRepository.GetCategoryById(categoryDto.Id) ?? throw new EntityNotFoundException();
+        entity.Name = categoryDto.Name;
+        entity.Description = categoryDto.Description;
+
+        await categoryRepository.Update(entity);
+
+        return await ResponseWrapper.SuccessAsync();
     }
 }

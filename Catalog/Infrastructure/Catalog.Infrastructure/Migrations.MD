@@ -1,0 +1,2 @@
+dotnet ef migrations add InitialCreate --project Catalog/Infrastructure/Catalog.Infrastructure --startup-project Catalog/Presentation/Catalog.Api
+dotnet ef database update --project Catalog/Infrastructure/Catalog.Infrastructure --startup-project Catalog/Presentation/Catalog.Api

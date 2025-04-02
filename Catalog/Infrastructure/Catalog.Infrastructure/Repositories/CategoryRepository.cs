@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.Exceptions;
-using Catalog.Application.Interfaces;
+﻿using Catalog.Application.Interfaces;
 using Catalog.Entities;
 using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +16,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task Create(Category category)
     {
-        _context.Categories.Add(category);
+        await _context.Categories.AddAsync(category);
         await _context.SaveChangesAsync();
     }
 
@@ -30,7 +29,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<IEnumerable<Category>> GetCategories()
     {
-        return await _context.Categories.ToListAsync();
+        return await _context.Categories.AsNoTracking().ToListAsync();
     }
 
     public async Task<Category?> GetCategoryById(int id)
