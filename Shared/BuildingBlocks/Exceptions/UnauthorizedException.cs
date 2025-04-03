@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 
 namespace BuildingBlocks.Exceptions;
 
-public class EntityNotFoundException : Exception
+public class UnauthorizedException : Exception
 {
-    public EntityNotFoundException(List<string> errorMEssages = default, HttpStatusCode statusCode = HttpStatusCode.NotFound)
+    public UnauthorizedException(List<string> errorMEssages = default, HttpStatusCode statusCode = HttpStatusCode.Unauthorized)
     {
         ErrorMessages = errorMEssages;
         StatusCode = statusCode;

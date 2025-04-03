@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Exceptions;
+using BuildingBlocks.Wrappers.http;
 using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
 using Catalog.Entities;
@@ -8,19 +9,21 @@ namespace Catalog.Application.Services;
 
 public class ProductService(IProductRepository productRepository) : IProductService
 {
-    public async Task Create(CreateProductDto product)
+    public async Task<IResponseWrapper> Create(CreateProductDto product)
     {
         var entity = product.Adapt<Product>();
         await productRepository.Create(entity);
+        return await ResponseWrapper.SuccessAsync();
     }
-    public async Task Delete(int id)
+    public async Task<IResponseWrapper> Delete(int id)
     {
-        var entity = await productRepository.GetProductById(id) ?? throw new EntityNotFoundException();
+        var entity = await productRepository.GetProductById(id) ?? throw new EntityNotFoundException(["Product not found"]);
         await productRepository.Delete(entity);
+        return await ResponseWrapper.SuccessAsync();
     }
-    public async Task Update(UpdateProductDto product)
+    public async Task<IResponseWrapper> Update(UpdateProductDto product)
     {
-        var entity = await productRepository.GetProductById(product.Id) ?? throw new EntityNotFoundException();
+        var entity = await productRepository.GetProductById(product.Id) ?? throw new EntityNotFoundException(["Product not found"]);
         entity.Name = product.Name;
         entity.Description = product.Description;
         entity.Price = product.Price;
@@ -28,22 +31,26 @@ public class ProductService(IProductRepository productRepository) : IProductServ
         entity.ImageUrl = product.ImageUrl;
 
         await productRepository.Update(entity);
+        return await ResponseWrapper.SuccessAsync();
     }
 
-    public async Task<IEnumerable<ProductDto>> GetProductByCategory(int categoryId) {
+    public async Task<IResponseWrapper> GetProductByCategory(int categoryId) {
         var products = await productRepository.GetProductByCategory(categoryId);
 
-        return products.Adapt<IEnumerable<ProductDto>>();
+        var dtos = products.Adapt<IEnumerable<ProductDto>>();
+        return await ResponseWrapper<IEnumerable<ProductDto>>.SuccessAsync(data: dtos);
     }
-    public async Task<ProductDto> GetProductById(int id)
+    public async Task<IResponseWrapper> GetProductById(int id)
     {
-        var entity =  await productRepository.GetProductById(id) ?? throw new EntityNotFoundException();
-        return entity.Adapt<ProductDto>();
+        var entity =  await productRepository.GetProductById(id) ?? throw new EntityNotFoundException(["Product not found"]);
+        var dto = entity.Adapt<ProductDto>();
+        return await ResponseWrapper<ProductDto>.SuccessAsync(data: dto);
     }
-    public async Task<IEnumerable<ProductDto>> GetProducts()
+    public async Task<IResponseWrapper> GetProducts()
     {
         var products = await productRepository.GetProducts();
 
-        return products.Adapt<IEnumerable<ProductDto>>();
+        var dtos =  products.Adapt<IEnumerable<ProductDto>>();
+        return await ResponseWrapper<IEnumerable<ProductDto>>.SuccessAsync(data: dtos);
     }
 }

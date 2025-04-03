@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 
 namespace BuildingBlocks.Exceptions;
 
-public class EntityNotFoundException : Exception
+public class ForbiddenException : Exception
 {
-    public EntityNotFoundException(List<string> errorMEssages = default, HttpStatusCode statusCode = HttpStatusCode.NotFound)
+    public ForbiddenException(List<string> errorMEssages = default, HttpStatusCode statusCode = HttpStatusCode.Forbidden)
     {
         ErrorMessages = errorMEssages;
         StatusCode = statusCode;

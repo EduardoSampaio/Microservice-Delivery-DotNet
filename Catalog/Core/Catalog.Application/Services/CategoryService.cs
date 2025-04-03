@@ -19,7 +19,8 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
 
     public async Task<IResponseWrapper> Delete(int id)
     {
-        var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException();
+        var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException(
+            ["Category not found"]);
 
         await categoryRepository.Delete(entity);
 
@@ -35,14 +36,15 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
     }
     public async Task<IResponseWrapper> GetCategoryById(int id)
     {
-        var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException();
+        var entity = await categoryRepository.GetCategoryById(id) ?? throw new EntityNotFoundException(
+         ["Category not found"]);
 
         var dto = entity.Adapt<CategoryDto>();
         return await ResponseWrapper<CategoryDto>.SuccessAsync(data: dto);
     }
     public async Task<IResponseWrapper> Update(CategoryDto categoryDto)
     {
-        var entity = await categoryRepository.GetCategoryById(categoryDto.Id) ?? throw new EntityNotFoundException();
+        var entity = await categoryRepository.GetCategoryById(categoryDto.Id) ?? throw new EntityNotFoundException(["Category not found"]);
         entity.Name = categoryDto.Name;
         entity.Description = categoryDto.Description;
 

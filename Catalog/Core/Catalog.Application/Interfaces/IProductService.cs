@@ -1,14 +1,15 @@
-﻿using Catalog.Application.DTOs;
+﻿using BuildingBlocks.Wrappers.http;
+using Catalog.Application.DTOs;
 
 namespace Catalog.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductDto>> GetProducts();
-        Task<ProductDto> GetProductById(int id);
-        Task<IEnumerable<ProductDto>> GetProductByCategory(int categoryId);
-        Task Create(CreateProductDto product);
-        Task Update(UpdateProductDto product);
-        Task Delete(int id);
+        Task<IResponseWrapper> GetProducts();
+        Task<IResponseWrapper> GetProductById(int id);
+        Task<IResponseWrapper> GetProductByCategory(int categoryId);
+        Task<IResponseWrapper> Create(CreateProductDto product);
+        Task<IResponseWrapper> Update(UpdateProductDto product);
+        Task<IResponseWrapper> Delete(int id);
     }
 }
