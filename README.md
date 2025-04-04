@@ -46,24 +46,24 @@ A Arquitetura Limpa é baseada em camadas concêntricas, onde as dependências s
 
 🔄 Camadas da Arquitetura
 1. Entidades (Domínio)
-📌 Contém as regras de negócio essenciais da aplicação.
-✅ Independente de banco de dados, UI, frameworks e bibliotecas.
-👉 Exemplo: Classes de domínio como Cliente, Pedido, Produto.
+* 📌 Contém as regras de negócio essenciais da aplicação.
+* ✅ Independente de banco de dados, UI, frameworks e bibliotecas.
+* 👉 Exemplo: Classes de domínio como Cliente, Pedido, Produto.
 
-1. Casos de Uso (Aplicação/Use Cases)
-📌 Contém a lógica de aplicação e orquestra as regras de negócio.
-✅ Define os serviços que a aplicação deve fornecer.
-👉 Exemplo: CadastrarClienteUseCase, ProcessarPagamentoUseCase.
+2. Casos de Uso (Aplicação/Use Cases)
+* 📌 Contém a lógica de aplicação e orquestra as regras de negócio.
+* ✅ Define os serviços que a aplicação deve fornecer.
+* 👉 Exemplo: CadastrarClienteUseCase, ProcessarPagamentoUseCase.
 
-1. Adaptadores (Interface/Drivers)
-📌 Camada que expõe os casos de uso via API, UI ou CLI.
-✅ Converte dados de entrada para um formato que os casos de uso entendem.
-👉 Exemplo: Controllers em uma API REST, interfaces gráficas.
+3. Adaptadores (Interface/Drivers)
+* 📌 Camada que expõe os casos de uso via API, UI ou CLI.
+* ✅ Converte dados de entrada para um formato que os casos de uso entendem.
+* 👉 Exemplo: Controllers em uma API REST, interfaces gráficas.
 
-1. Infraestrutura (Frameworks & External Services)
-📌 Contém tudo que é externo à aplicação (Banco de Dados, APIs, Mensageria, etc.).
-✅ Pode ser substituído sem impactar as regras de negócio.
-👉 Exemplo: Repositórios, ORM (Entity Framework, Dapper), provedores de e-mail, gateways de pagamento.
+4. Infraestrutura (Frameworks & External Services)
+* 📌 Contém tudo que é externo à aplicação (Banco de Dados, APIs, Mensageria, etc.).
+* ✅ Pode ser substituído sem impactar as regras de negócio.
+* 👉 Exemplo: Repositórios, ORM (Entity Framework, Dapper), provedores de e-mail, gateways de pagamento.
 
 📌 Benefícios da Arquitetura Limpa
 * ✅ Facilidade de Manutenção – Código modular e desacoplado.
