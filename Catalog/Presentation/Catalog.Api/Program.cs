@@ -9,14 +9,17 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Discovery.Consul;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddServiceDiscovery(o => o.UseConsul());
+
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
     .Enrich.FromLogContext()
     .CreateLogger();
 
@@ -63,6 +66,12 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 // Apply migrations automatically
 using (var scope = app.Services.CreateScope())

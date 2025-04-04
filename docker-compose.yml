@@ -1,31 +1,39 @@
 services:
+  postgres_db:
+    image: postgres
+
+  consul:
+    image: hashicorp/consul:latest
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Catalog/Presentation/Catalog.Api/Dockerfile
- 
-  prometheus:
-    image: prom/prometheus:latest
-
-  tempo:
-    image: grafana/tempo:latest
-
-  grafana:
-    image: grafana/grafana:latest
-
-  otel-collector:
-    image: otel/opentelemetry-collector:latest
-
-  postgres_db:
-    image: postgres
-
-  portainer:
-    image: portainer/portainer-ce:latest
 
   gateway.api:
     image: ${DOCKER_REGISTRY-}gatewayapi
     build:
       context: .
       dockerfile: Gateway/Gateway.Api/Dockerfile
+
+
+  # prometheus:
+  #   image: prom/prometheus:latest
+
+  # tempo:
+  #   image: grafana/tempo:latest
+
+  # grafana:
+  #   image: grafana/grafana:latest
+
+  # otel-collector:
+  #   image: otel/opentelemetry-collector:latest
+
+
+
+  # portainer:
+  #   image: portainer/portainer-ce:latest
+
+
 

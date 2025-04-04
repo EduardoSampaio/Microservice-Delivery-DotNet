@@ -41,7 +41,7 @@ Esse microservice utiliza:
 
 A Arquitetura Limpa foi proposta por Robert C. Martin (Uncle Bob) e tem como objetivo criar sistemas modulares, testáveis e fáceis de manter, separando regras de negócio da infraestrutura e frameworks.
 
-🎯 Principais Conceitos da Arquitetura Limpa
+### 🎯 Principais Conceitos da Arquitetura Limpa
 A Arquitetura Limpa é baseada em camadas concêntricas, onde as dependências sempre apontam para o núcleo da aplicação (regra de negócio).
 
 🔄 Camadas da Arquitetura
@@ -73,6 +73,8 @@ A Arquitetura Limpa é baseada em camadas concêntricas, onde as dependências s
 
 ## Tecnologias e Libs utilizadas  
 
+![Tecnologias](img/tecnologias-api-catalog.png)
+
 * **Minimal API** – Implementação leve de APIs no .NET, sem necessidade de Controllers.  
 * **Serilog** – Biblioteca para logging estruturado e configurável.  
 * **Entity Framework** – ORM para manipulação de banco de dados no .NET.  
@@ -89,8 +91,8 @@ A Arquitetura Limpa é baseada em camadas concêntricas, onde as dependências s
 
 A Arquitetura de Três Camadas (Three-Tier Architecture) é um modelo arquitetural amplamente utilizado no desenvolvimento de sistemas, que separa a aplicação em três camadas distintas, garantindo modularidade, escalabilidade e manutenção facilitada.
 
-📌 Camadas da Arquitetura
-1️⃣ Camada de Apresentação (Presentation Layer)
+### 📌 Camadas da Arquitetura
+#### 1️⃣ Camada de Apresentação (Presentation Layer)
 
 Responsável pela interface com o usuário (UI).
 
@@ -98,7 +100,7 @@ Pode ser um front-end web (React, Angular, Blazor), uma API REST ou uma interfac
 
 Exemplo: Controllers no ASP.NET, páginas em Razor Pages.
 
-2️⃣ Camada de Aplicação/Negócio (Business Logic Layer - BLL)
+#### 2️⃣ Camada de Aplicação/Negócio (Business Logic Layer - BLL)
 
 Contém a lógica de negócio e regras da aplicação.
 
@@ -106,7 +108,7 @@ Processa dados recebidos da Apresentação e acessa a Camada de Dados.
 
 Exemplo: Serviços, Validadores e Use Cases.
 
-3️⃣ Camada de Dados (Data Access Layer - DAL)
+#### 3️⃣ Camada de Dados (Data Access Layer - DAL)
 
 Gerencia o acesso ao banco de dados ou outras fontes de dados.
 
@@ -121,7 +123,7 @@ Exemplo: Repositórios e Contextos de banco de dados.
 * ✅ Testabilidade – A lógica de negócio pode ser testada sem depender da interface ou do banco de dados.
 
 
-🔎 Diferença entre Arquitetura em 3 Camadas e Arquitetura Limpa
+### 🔎 Diferença entre Arquitetura em 3 Camadas e Arquitetura Limpa
 
 Arquitetura 3 Camadas	Arquitetura Limpa
 Divide a aplicação em UI, Negócio e Dados	Organiza em Domínio, Aplicação, Infraestrutura e Interface
