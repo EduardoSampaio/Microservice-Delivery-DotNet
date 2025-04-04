@@ -66,10 +66,10 @@ A Arquitetura Limpa é baseada em camadas concêntricas, onde as dependências s
 👉 Exemplo: Repositórios, ORM (Entity Framework, Dapper), provedores de e-mail, gateways de pagamento.
 
 📌 Benefícios da Arquitetura Limpa
-✅ Facilidade de Manutenção – Código modular e desacoplado.
-✅ Testabilidade – Possível testar regras de negócio sem depender de infraestrutura.
-✅ Independência de Frameworks – Troca de tecnologias sem afetar o core.
-✅ Escalabilidade – Modularização facilita a evolução do projeto.
+* ✅ Facilidade de Manutenção – Código modular e desacoplado.
+* ✅ Testabilidade – Possível testar regras de negócio sem depender de infraestrutura.
+* ✅ Independência de Frameworks – Troca de tecnologias sem afetar o core.
+* ✅ Escalabilidade – Modularização facilita a evolução do projeto.
 
 ## Tecnologias e Libs utilizadas  
 
@@ -115,10 +115,10 @@ Utiliza ORM (como Entity Framework) ou repositórios para buscar e manipular inf
 Exemplo: Repositórios e Contextos de banco de dados.
 
 📌 Benefícios da Arquitetura de Três Camadas
-✅ Separação de responsabilidades – Cada camada tem seu próprio papel bem definido.
-✅ Facilidade de manutenção – Alterações em uma camada não afetam as outras diretamente.
-✅ Escalabilidade – Permite distribuir as camadas em diferentes servidores, melhorando a performance.
-✅ Testabilidade – A lógica de negócio pode ser testada sem depender da interface ou do banco de dados.
+* ✅ Separação de responsabilidades – Cada camada tem seu próprio papel bem definido.
+* ✅ Facilidade de manutenção – Alterações em uma camada não afetam as outras diretamente.
+* ✅ Escalabilidade – Permite distribuir as camadas em diferentes servidores, melhorando a performance.
+* ✅ Testabilidade – A lógica de negócio pode ser testada sem depender da interface ou do banco de dados.
 
 
 🔎 Diferença entre Arquitetura em 3 Camadas e Arquitetura Limpa
