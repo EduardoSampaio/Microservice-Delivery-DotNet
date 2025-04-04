@@ -16,7 +16,7 @@ public class ProductEndpoint : ICarterModule
                                      .ReportApiVersions()
                                      .Build();
 
-        RouteGroupBuilder groupBuilder = app.MapGroup("api/v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
+        RouteGroupBuilder groupBuilder = app.MapGroup("v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
 
         groupBuilder.MapGet("products", async (IProductService service) =>
         {

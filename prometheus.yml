@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 5s  # How often to scrape targets
+
+scrape_configs:
+  - job_name: 'otel-collector'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['otel-collector:9464']  # Scrape metrics from OpenTelemetry Collector

@@ -8,4 +8,6 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Hosting;
+global using BuildingBlocks.Middleware;
+global using Catalog.Infrastructure.Data;
 

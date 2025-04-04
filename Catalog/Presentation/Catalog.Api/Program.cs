@@ -1,13 +1,26 @@
 ﻿using Asp.Versioning;
-using BuildingBlocks.Middleware;
 using Carter;
-using Catalog.Infrastructure.Data;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 
@@ -15,15 +28,27 @@ builder.Services.AddHealthChecks()
                 .AddNpgSql(connectionString, "SELECT 1;")
                 .AddDbContextCheck<AppDbContext>();
 
-builder.Services.AddHealthChecksUI(opt =>
-{
-    opt.SetEvaluationTimeInSeconds(10); //time in seconds between check    
-    opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks    
-    opt.SetApiMaxActiveRequests(1); //api requests concurrency    
-    opt.AddHealthCheckEndpoint("feedback api", "/api/health"); //map health check api    
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource =>
+    {
+        resource.AddService("Catalog.Api");
+    })
+    .WithMetrics(metrics =>
+    {
+        metrics.AddAspNetCoreInstrumentation()
+               .AddHttpClientInstrumentation();
 
-}).AddInMemoryStorage();
+        metrics.AddOtlpExporter();
+    })
+    .WithTracing(tracers =>
+    {
+        tracers.AddAspNetCoreInstrumentation()
+               .AddHttpClientInstrumentation();
 
+        tracers.AddOtlpExporter();
+    });
+
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -39,6 +64,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
+// Apply migrations automatically
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -49,8 +81,6 @@ app.UseHealthChecks("/api/health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
-
-app.UseHealthChecksUI(options => options.UIPath = "/health-ui");
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ErrorHandlingMiddleware>();
