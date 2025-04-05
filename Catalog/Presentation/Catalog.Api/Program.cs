@@ -15,8 +15,6 @@ using Steeltoe.Discovery.Consul;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddServiceDiscovery(o => o.UseConsul());
-
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .WriteTo.Console(theme: AnsiConsoleTheme.Code)
