@@ -9,9 +9,6 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
-using Steeltoe.Discovery.Client;
-using Steeltoe.Discovery.Consul;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
