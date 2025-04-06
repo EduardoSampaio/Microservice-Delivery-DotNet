@@ -13,6 +13,18 @@ services:
     networks:
       - micro
 
+  redis:
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server --maxmemory 100mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - micro
+
   catalog.api:
     container_name: catalog.api
     environment:
@@ -121,6 +133,8 @@ networks:
       bridge
 
 volumes:
+  redis-data:
+    driver: local
   grafana-storage:
     driver: local
   portainer_data:

@@ -74,7 +74,6 @@ app.UseHealthChecks("/api/health", new HealthCheckOptions
 });
 
 app.UseMiddleware<RequestLogContextMiddleware>();
-app.UseSerilogRequestLogging();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapCarter();
 

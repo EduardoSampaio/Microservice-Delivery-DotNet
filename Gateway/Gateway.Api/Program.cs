@@ -1,7 +1,10 @@
-﻿using BuildingBlocks.Middleware;
+﻿using System.IO.Compression;
+using System.Text.Json.Serialization;
+using BuildingBlocks.Middleware;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.ResponseCompression;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
@@ -14,6 +17,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
 
 builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<GzipCompressionProvider>();
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Fastest;
+});
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "redis:6379";
+    options.InstanceName = "GatewayApp";
+});
 
 
 builder.Services.AddRateLimiter(rateLimiterOptions =>
@@ -63,9 +88,12 @@ app.UseHealthChecks("/api/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-app.UseMiddleware<RequestLogContextMiddleware>();
-app.UseSerilogRequestLogging();
+
+app.UseResponseCompression();
+app.UseMiddleware<CacheMiddleware>();
 app.MapReverseProxy();
 app.UseRateLimiter();
+app.UseMiddleware<RequestLogContextMiddleware>();
+app.UseSerilogRequestLogging();
 
 await app.RunAsync();

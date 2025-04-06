@@ -2,6 +2,9 @@ services:
   postgres_db:
     image: postgres
 
+  redis:
+    image: redis:7.2
+
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:

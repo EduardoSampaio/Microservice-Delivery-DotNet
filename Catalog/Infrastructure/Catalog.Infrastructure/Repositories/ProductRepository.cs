@@ -46,7 +46,7 @@ public class ProductRepository : IProductRepository
     public async Task<IEnumerable<Product>> GetProducts()
     {
         return await _context.Products
-                             .Include(p => p.Category)  // Eager load the Category
+                             .Include(p => p.Category)
                              .AsNoTracking()
                              .ToListAsync();
     }
