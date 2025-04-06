@@ -2,9 +2,6 @@ services:
   postgres_db:
     image: postgres
 
-  consul:
-    image: hashicorp/consul:latest
-
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:

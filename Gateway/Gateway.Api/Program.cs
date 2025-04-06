@@ -25,13 +25,8 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     });
 });
 
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-    .Enrich.FromLogContext()
-    .CreateLogger();
-
-builder.Host.UseSerilog();
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource =>
@@ -68,6 +63,8 @@ app.UseHealthChecks("/api/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
+
+app.UseSerilogRequestLogging();
 app.MapReverseProxy();
 app.UseRateLimiter();
 

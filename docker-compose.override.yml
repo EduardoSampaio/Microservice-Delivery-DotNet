@@ -32,7 +32,6 @@ services:
     networks:
       - micro
     depends_on:
-      - consul
       - postgres_db
       #- otel-collector 
   
@@ -54,7 +53,6 @@ services:
     networks:
       - micro
     depends_on:
-      - consul
       - catalog.api
    
 
@@ -123,8 +121,6 @@ networks:
       bridge
 
 volumes:
-  consul_data:
-   driver: local
   grafana-storage:
     driver: local
   portainer_data:
