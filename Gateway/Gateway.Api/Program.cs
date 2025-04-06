@@ -1,4 +1,5 @@
-﻿using HealthChecks.UI.Client;
+﻿using BuildingBlocks.Middleware;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
 using OpenTelemetry.Logs;
@@ -6,7 +7,6 @@ using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Serilog;
-using Serilog.Sinks.SystemConsole.Themes;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,7 +63,7 @@ app.UseHealthChecks("/api/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
 
-
+app.UseMiddleware<RequestLogContextMiddleware>();
 app.UseSerilogRequestLogging();
 app.MapReverseProxy();
 app.UseRateLimiter();
