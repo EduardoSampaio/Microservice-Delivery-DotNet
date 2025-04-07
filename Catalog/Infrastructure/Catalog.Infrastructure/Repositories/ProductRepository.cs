@@ -1,4 +1,7 @@
-﻿using BuildingBlocks.Exceptions;
+﻿using System.Linq;
+using System.Linq.Expressions;
+using BuildingBlocks.Exceptions;
+using BuildingBlocks.Wrappers.http;
 using Catalog.Application.Interfaces;
 using Catalog.Entities;
 using Catalog.Infrastructure.Data;
@@ -26,6 +29,41 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
 
+    }
+
+    public async Task<PagedResult<Product>> GetPagedAsync(
+        Expression<Func<Product, bool>>? filter = null,
+        Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null,
+        int pageIndex = 0,
+        int pageSize = 10
+        )
+    {
+        IQueryable<Product> query = _context.Products;
+
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        var totalCount = await query.CountAsync();
+
+        if (orderBy != null)
+        {
+            query = orderBy(query);
+        }
+
+        var items = await query
+            .Skip(pageIndex * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<Product>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            PageIndex = pageIndex,
+            PageSize = pageSize
+        };
     }
 
     public async Task<IEnumerable<Product>> GetProductByCategory(int categoryId)

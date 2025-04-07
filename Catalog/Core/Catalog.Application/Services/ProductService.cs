@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Exceptions;
+﻿using System.Linq.Expressions;
+using BuildingBlocks.Exceptions;
 using BuildingBlocks.Wrappers.http;
 using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
@@ -46,11 +47,25 @@ public class ProductService(IProductRepository productRepository) : IProductServ
         var dto = entity.Adapt<ProductDto>();
         return await ResponseWrapper<ProductDto>.SuccessAsync(data: dto);
     }
-    public async Task<IResponseWrapper> GetProducts()
+    public async Task<IResponseWrapper> GetPagedAsync(QueryParameters queryParameters)
     {
-        var products = await productRepository.GetProducts();
+        var filter = QueryParamsBuilder<Product>.BuildProductFilter(queryParameters.Filter);
+        var orderBy = QueryParamsBuilder<Product>.GetOrderByDynamic(queryParameters.OrderBy, queryParameters.SortDirection);
+        int pageIndex = queryParameters.PageIndex;
+        int pageSize = queryParameters.PageSize;
 
-        var dtos =  products.Adapt<IEnumerable<ProductDto>>();
-        return await ResponseWrapper<IEnumerable<ProductDto>>.SuccessAsync(data: dtos);
+        PagedResult<Product> paged = await productRepository.GetPagedAsync(filter, orderBy, pageIndex, pageSize);
+
+        var dtos = paged.Items.Adapt<List<ProductDto>>();
+
+        var pagedResult = new PagedResult<ProductDto>
+        {
+            Items = dtos,
+            TotalCount = paged.TotalCount,
+            PageIndex = paged.PageIndex,
+            PageSize = paged.PageSize
+        };
+
+        return await ResponseWrapper<PagedResult<ProductDto>>.SuccessAsync(data: pagedResult);
     }
 }

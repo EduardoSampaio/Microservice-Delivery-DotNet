@@ -1,9 +1,12 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Builder;
+using BuildingBlocks.Wrappers.http;
 using Carter;
 using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Catalog.Api.Endpoints.V1;
 
@@ -18,9 +21,15 @@ public class ProductEndpoint : ICarterModule
 
         RouteGroupBuilder groupBuilder = app.MapGroup("v{apiVersion:apiVersion}").WithApiVersionSet(apiVersionSet);
 
-        groupBuilder.MapGet("products", async (IProductService service) =>
+        groupBuilder.MapGet("products", async (HttpContext context, IProductService service) =>
         {
-            var response = await service.GetProducts();
+            if (!QueryParameterParser.TryParseQueryParameters(context.Request.Query, out var queryParams))
+            {
+                return Results.BadRequest("Invalid query parameters");
+            }
+
+            var response = await service.GetPagedAsync(queryParams);
+
             if (response.ISuccessful)
             {
                 return Results.Ok(response);
