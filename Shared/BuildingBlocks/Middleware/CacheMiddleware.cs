@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-
+/**
+ * CacheMiddleware class is a custom middleware for caching HTTP GET requests.
+ * It checks if the response for a request is already cached and serves it from the cache if available.
+ * If not, it processes the request, caches the response, and then returns it to the client.
+ */
 public class CacheMiddleware
 {
     private readonly RequestDelegate _next;

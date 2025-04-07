@@ -8,7 +8,10 @@ using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories;
-
+/**
+ * ProductRepository class implements IProductRepository interface to manage product-related operations.
+ * It provides methods to create, update, delete, and retrieve products.
+ */
 public class ProductRepository : IProductRepository
 {
     private readonly AppDbContext _context;

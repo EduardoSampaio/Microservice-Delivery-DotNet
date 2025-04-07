@@ -5,6 +5,11 @@ using Serilog.Context;
 
 namespace BuildingBlocks.Middleware
 {
+    /**
+     * RequestLogContextMiddleware is a custom middleware that logs the details of incoming HTTP requests and their responses.
+     * It uses Serilog's LogContext to add properties to the log context, such as CorrelationId, RequestId, RequestPath, and RequestMethod.
+     * The middleware measures the time taken to process each request and logs the status code of the response.
+     */
     public class RequestLogContextMiddleware
     {
         private readonly RequestDelegate _next;

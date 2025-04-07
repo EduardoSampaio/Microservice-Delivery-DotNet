@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using BuildingBlocks.Exceptions;
+﻿using BuildingBlocks.Exceptions;
 using BuildingBlocks.Wrappers.http;
 using Catalog.Application.DTOs;
 using Catalog.Application.Interfaces;
@@ -7,7 +6,10 @@ using Catalog.Entities;
 using Mapster;
 
 namespace Catalog.Application.Services;
-
+/**
+ * ProductService class implements IProductService interface to manage product-related operations.
+ * It provides methods to create, update, delete, and retrieve products.
+ */
 public class ProductService(IProductRepository productRepository) : IProductService
 {
     public async Task<IResponseWrapper> Create(CreateProductDto product)

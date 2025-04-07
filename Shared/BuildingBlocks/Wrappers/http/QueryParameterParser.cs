@@ -10,14 +10,14 @@ namespace BuildingBlocks.Wrappers.http
 
             // PageIndex
             if (query.TryGetValue("pageIndex", out var pageIndexValue) &&
-                int.TryParse(pageIndexValue, out int pageIndex))
+                int.TryParse(pageIndexValue, out var pageIndex))
             {
                 result.PageIndex = pageIndex;
             }
 
             // PageSize
             if (query.TryGetValue("pageSize", out var pageSizeValue) &&
-                int.TryParse(pageSizeValue, out int pageSize))
+                int.TryParse(pageSizeValue, out var pageSize))
             {
                 result.PageSize = pageSize;
             }

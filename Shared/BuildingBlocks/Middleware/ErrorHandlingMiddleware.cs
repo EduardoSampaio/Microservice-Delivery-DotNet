@@ -6,7 +6,10 @@ using System.Net;
 using System.Text.Json;
 
 namespace BuildingBlocks.Middleware;
-
+/**
+ * ErrorHandlingMiddleware is a custom middleware that handles exceptions thrown during the request processing pipeline.
+ * It catches specific exceptions and returns appropriate HTTP responses with error messages.
+ */
 public class ErrorHandlingMiddleware(RequestDelegate next)
 {
     private readonly RequestDelegate _next = next;

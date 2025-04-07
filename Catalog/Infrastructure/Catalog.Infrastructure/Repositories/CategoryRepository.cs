@@ -4,7 +4,10 @@ using Catalog.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories;
-
+/**
+ * CategoryRepository class implements ICategoryRepository interface to manage category-related operations.
+ * It provides methods to create, update, delete, and retrieve categories.
+ */
 public class CategoryRepository : ICategoryRepository
 {
     private readonly AppDbContext _context;

@@ -6,7 +6,10 @@ using Catalog.Entities;
 using Mapster;
 
 namespace Catalog.Application.Services;
-
+/**
+ * CategoryService class implements ICategoryService interface to manage category-related operations.
+ * It provides methods to create, update, delete, and retrieve categories.
+ */
 public class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
     public async Task<IResponseWrapper> Create(CreateCategoryDto categoryDto)
