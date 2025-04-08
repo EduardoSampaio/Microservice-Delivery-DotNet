@@ -101,7 +101,7 @@ public class ResponseWrapper : IResponseWrapper
 
 public class ResponseWrapper<T> : ResponseWrapper, IResponseWrapper<T>
 {
-    public T Data { get; set; }
+    public T Data { get; set; } = default!;
 
     public static new IResponseWrapper<T> Fail()
     {
