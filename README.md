@@ -1,13 +1,14 @@
-# Microservice Delivery APP
+# Microservice APP
 
 | Name Service | Port Http | Port Https |
 | ------------ | ---------| ----- |
 | Gateway | 5000 | 5001
 | Catalog | 5100 | 5101 |
 | Payment | 5200|5201 |
-| Notification | 5300 | 9301 |
-| Order | 9400 | 9401 |
-| IdentityServer | 9500| 9501 |
+| Order | 5300 | 5301 |
+| Identity | 5400| 5401 |
+
+![Image](img/services.png)
 
 
 ## Api Gateway Yarp
@@ -136,5 +137,39 @@ Mais simples e direta	Mais flexível e adaptável a mudanças
 | Camadas são **interdependentes** | Camadas dependem apenas do **Domínio** |
 | Mais **simples e direta** | Mais **flexível e adaptável a mudanças** |
 
+# Order Microservice
 
-.... under construction
+A arquitetura hexagonal, também conhecida como Ports and Adapters, é um estilo arquitetural criado por Alistair Cockburn com o objetivo de tornar os sistemas mais independentes de frameworks, bancos de dados, interfaces de usuário e dispositivos externos.
+
+![hexagonal](img/hexa.png)
+
+### 🧩 Conceito central
+O sistema é dividido em núcleo de negócio (ou domínio) e adapters (adaptadores) conectados por ports (portas).
+
+* Núcleo (Domínio ou Core): contém as regras de negócio puras e independentes de qualquer tecnologia externa.
+
+* Ports (Portas): interfaces que definem como o núcleo se comunica com o mundo externo.
+
+* Adapters (Adaptadores): implementações dessas portas — como REST APIs, bancos de dados, filas, etc.
+
+
+A **Vertical Slice Architecture (ou arquitetura por fatias verticais)** é uma abordagem de organização de código onde o sistema é dividido em fatias completas e independentes, cada uma representando uma funcionalidade específica — do início ao fim (da entrada até a persistência ou resposta).
+
+📚 Conceito principal
+Em vez de organizar o código por camadas horizontais (como Controller → Service → Repository), a Vertical Slice organiza por funcionalidades ou casos de uso, como:
+
+* CriarPedido
+* AtualizarCliente
+* ProcessarPagamento
+
+Cada slice inclui tudo o que é necessário para executar esse caso de uso, como:
+
+* Endpoint ou handler (entrada)
+* Validação
+* Regras de negócio
+* Acesso a dados
+* Output (view model, resposta)
+
+![vertical](img/vertical.png)
+
+.... em construção
