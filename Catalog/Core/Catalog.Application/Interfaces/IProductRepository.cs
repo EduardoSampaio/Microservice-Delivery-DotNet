@@ -10,7 +10,8 @@ public interface IProductRepository
         Expression<Func<Product, bool>>? filter = null,
         Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null,
         int pageIndex = 0,
-        int pageSize = 10
+        int pageSize = 10,
+        params string[] includeProperties
     );
 
     Task<Product?> GetProductById(int id);

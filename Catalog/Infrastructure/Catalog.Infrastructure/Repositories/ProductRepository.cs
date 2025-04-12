@@ -38,7 +38,8 @@ public class ProductRepository : IProductRepository
         Expression<Func<Product, bool>>? filter = null,
         Func<IQueryable<Product>, IOrderedQueryable<Product>>? orderBy = null,
         int pageIndex = 0,
-        int pageSize = 10
+        int pageSize = 10,
+        params string[] includeProperties
         )
     {
         IQueryable<Product> query = _context.Products;
@@ -46,6 +47,11 @@ public class ProductRepository : IProductRepository
         if (filter != null)
         {
             query = query.Where(filter);
+        }
+
+        if (includeProperties.Length > 0)
+        {
+            query = includeProperties.Aggregate(query, (theQuery, theInclude) => theQuery.Include(theInclude));
         }
 
         var totalCount = await query.CountAsync();
