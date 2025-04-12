@@ -26,6 +26,7 @@ public class OrderItem : IEntity
 
     public override bool Equals(object? obj) => obj is OrderItem item && Id == item.Id;
     public override int GetHashCode() => HashCode.Combine(Id);
+    public virtual Order? Order { get; set; }
 }
 
 

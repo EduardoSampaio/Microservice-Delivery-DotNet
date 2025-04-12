@@ -3,7 +3,7 @@ using Order.Domain.Exceptions;
 
 namespace Order.Domain.Entities;
 
-public class ShoppingCart: IAggregateRoot
+public class ShoppingCart: IEntity
 {
     private ShoppingCart() { }
     public ShoppingCart(Guid customerId, HashSet<ShoppingCartItem> itens)
@@ -12,7 +12,7 @@ public class ShoppingCart: IAggregateRoot
         Items = itens;
     }
 
-    public int Id { get; private set; }
+    public string Id { get; private set; } = default!;
     public Guid CustomerId { get;}
     public virtual HashSet<ShoppingCartItem> Items { get; private set; } = [];
 

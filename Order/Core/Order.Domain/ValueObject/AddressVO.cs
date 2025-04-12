@@ -4,6 +4,7 @@ namespace Order.Domain.ValueObject;
 
 public sealed class AddressVO: IEquatable<AddressVO>,  IValueObject
 {
+
     public string AddressLine { get; }
     public string Country { get; }
     public string State { get; }

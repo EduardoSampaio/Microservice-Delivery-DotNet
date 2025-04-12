@@ -53,7 +53,7 @@ public class AssertionConcern
     {
         if (stringValue == null || stringValue.Trim().Length == 0)
         {
-            throw new DomainException(message);
+            throw new DomainException($"{message} is empty");
         }
     }
 
@@ -69,7 +69,7 @@ public class AssertionConcern
     {
         if (object1 == null)
         {
-            throw new DomainException($"Object is null {message}");
+            throw new DomainException($"{message} is null");
         }
     }
 
