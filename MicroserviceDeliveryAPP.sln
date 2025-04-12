@@ -67,6 +67,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Data", "Order\Adapter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Infrastructure", "Order\Adapters\Secondary\Order.Infrastructure\Order.Infrastructure.csproj", "{005F319B-5F78-4144-9A79-CDD2244BEEDA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{6B1E492B-908F-4A19-809D-8F8FA09BC7CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentitiyServer", "Identity\IdentitiyServer\IdentitiyServer.csproj", "{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +137,10 @@ Global
 		{005F319B-5F78-4144-9A79-CDD2244BEEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005F319B-5F78-4144-9A79-CDD2244BEEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005F319B-5F78-4144-9A79-CDD2244BEEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +172,8 @@ Global
 		{7AF0549C-C191-4246-A32B-D4525E7CFD26} = {CB90D6CC-C560-46F9-BFCB-54E727132632}
 		{028A48DB-FC2D-4FFC-8D58-C74F9C60FBA6} = {8EFBC691-5ACD-45DF-968E-4AAA24C7B3F4}
 		{005F319B-5F78-4144-9A79-CDD2244BEEDA} = {8EFBC691-5ACD-45DF-968E-4AAA24C7B3F4}
+		{6B1E492B-908F-4A19-809D-8F8FA09BC7CA} = {796B0999-1333-4F5F-89F3-0A02B4524F51}
+		{6BCF90AA-B2A3-46FB-9C28-6E23B4CB974E} = {6B1E492B-908F-4A19-809D-8F8FA09BC7CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {981A05E3-1C76-461C-8CA5-226A0159ACA8}
