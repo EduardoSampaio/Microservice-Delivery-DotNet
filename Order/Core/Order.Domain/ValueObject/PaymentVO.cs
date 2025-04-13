@@ -5,7 +5,7 @@ namespace Order.Domain.ValueObject;
 
 public sealed class PaymentVO : IValueObject, IEquatable<PaymentVO>
 {
-    public PaymentVO(string cardName, string cardNumber, string expiration, string cvv, PaymentMethod paymentMethod)
+    public PaymentVO(string? cardName, string? cardNumber, string? expiration, string? cvv, PaymentMethod paymentMethod)
     {
         CardName = cardName;
         CardNumber = cardNumber;
@@ -14,10 +14,10 @@ public sealed class PaymentVO : IValueObject, IEquatable<PaymentVO>
         PaymentMethod = paymentMethod;
     }
 
-    public string CardName { get; }
-    public string CardNumber { get;}
-    public string Expiration { get;}
-    public string Cvv { get;}
+    public string? CardName { get; }
+    public string? CardNumber { get;}
+    public string? Expiration { get;}
+    public string? Cvv { get;}
     public PaymentMethod PaymentMethod { get;}
 
     public override bool Equals(object? obj) => base.Equals(obj);

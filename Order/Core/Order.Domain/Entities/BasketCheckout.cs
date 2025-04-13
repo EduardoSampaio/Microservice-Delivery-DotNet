@@ -8,7 +8,7 @@ public class BasketCheckout: IEntity
 {
     private BasketCheckout() {}
 
-    public BasketCheckout(CustomerVO customer, PaymentVO payment, AddressVO address, string shoppingCartId)
+    public BasketCheckout(CustomerVO customer, PaymentVO payment, AddressVO address, string? shoppingCartId)
     {
         AssertionConcern.AssertArgumentNotNull(customer, nameof(customer));
         AssertionConcern.AssertArgumentNotNull(payment, nameof(payment));

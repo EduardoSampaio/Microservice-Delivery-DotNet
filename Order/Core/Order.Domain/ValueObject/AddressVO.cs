@@ -2,15 +2,15 @@
 
 namespace Order.Domain.ValueObject;
 
-public sealed class AddressVO: IEquatable<AddressVO>,  IValueObject
+public sealed class AddressVO : IEquatable<AddressVO>, IValueObject
 {
 
-    public string AddressLine { get; }
-    public string Country { get; }
-    public string State { get; }
-    public string ZipCode { get; }
+    public string? AddressLine { get; }
+    public string? Country { get; }
+    public string? State { get; }
+    public string? ZipCode { get; }
 
-    public AddressVO(string addressLine, string country, string state, string zipCode)
+    public AddressVO(string? addressLine, string? country, string? state, string? zipCode)
     {
         AddressLine = addressLine;
         Country = country;
@@ -28,7 +28,10 @@ public sealed class AddressVO: IEquatable<AddressVO>,  IValueObject
         {
             return true;
         }
-        return AddressLine.Equals(other.AddressLine) && Country.Equals(other.Country) && State.Equals(other.State) && ZipCode.Equals(other.ZipCode);
+        return string.Equals(AddressLine, other.AddressLine, StringComparison.Ordinal) &&
+               string.Equals(Country, other.Country, StringComparison.Ordinal) &&
+               string.Equals(State, other.State, StringComparison.Ordinal) &&
+               string.Equals(ZipCode, other.ZipCode, StringComparison.Ordinal);
     }
 
     public override bool Equals(object? obj)

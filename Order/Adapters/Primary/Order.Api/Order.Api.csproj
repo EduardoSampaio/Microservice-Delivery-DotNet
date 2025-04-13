@@ -6,4 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Order.Application\Order.Application.csproj" />
+    <ProjectReference Include="..\..\..\Core\Order.Domain\Order.Domain.csproj" />
+    <ProjectReference Include="..\..\Secondary\Order.Data\Order.Data.csproj" />
+  </ItemGroup>
+
 </Project>
