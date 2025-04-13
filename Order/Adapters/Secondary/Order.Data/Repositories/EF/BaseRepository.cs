@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Order.Domain.Common.Interfaces;
 using Order.Domain.Repositories;
 
-namespace Order.Data.Repositories;
+namespace Order.Data.Repositories.EF;
 
 public abstract class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
 {

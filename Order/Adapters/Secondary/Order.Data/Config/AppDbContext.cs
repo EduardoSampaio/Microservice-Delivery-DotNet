@@ -3,12 +3,12 @@ using Order.Domain.Entities;
 
 namespace Order.Data.Config;
 
-public class AppContext : DbContext
+public class AppDbContext : DbContext
 {
     public DbSet<Domain.Entities.Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
 
-    public AppContext(DbContextOptions<AppContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
@@ -17,6 +17,6 @@ public class AppContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasDefaultSchema("OrderService");
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Order.Domain.Common;
 using Order.Domain.Common.Interfaces;
 using Order.Domain.Enums;
-using Order.Domain.Exceptions;
 using Order.Domain.ValueObject;
 
 namespace Order.Domain.Entities;
@@ -27,24 +26,10 @@ public class Order : IAggregateRoot
     public AddressVO? Address { get; set; }
     public OrderStatus OrderStatus { get; private set; }
     public DateTime OrderDate { get; private set; }
-    public decimal TotalAmount
-    {
-        get
-        {
-            return OrderItems.Sum(x => x.Price * x.Quantity);
-        }
-    }
+    public decimal TotalAmount => OrderItems.Sum(x => x.Price * x.Quantity);
     public virtual HashSet<OrderItem> OrderItems { get; private set; } = [];
-
-    public void UpdateOrderStatus(OrderStatus orderStatus)
-    {
-        OrderStatus = orderStatus;
-    }
-
-    public void UpdateAddress(AddressVO address)
-    {
-        Address = address;
-    }
+    public void UpdateOrderStatus(OrderStatus orderStatus) => OrderStatus = orderStatus;
+    public void UpdateAddress(AddressVO address) => Address = address;
 }
 
 
