@@ -21,6 +21,13 @@ jobs:
       run: dotnet restore MicroserviceDeliveryAPP.sln
     - name: Build MicroserviceDeliveryAPP
       run: dotnet build MicroserviceDeliveryAPP.sln 
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
       
   test:
     runs-on: ubuntu-latest
