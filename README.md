@@ -1,4 +1,5 @@
 # Microservice APP
+[![Build and Test .NET Project](https://github.com/EduardoSampaio/Microservice-Delivery-DotNet/actions/workflows/deploy.yaml/badge.svg)](https://github.com/EduardoSampaio/Microservice-Delivery-DotNet/actions/workflows/deploy.yaml)
 
 | Name Service | Port Http | Port Https |
 | ------------ | ---------| ----- |
