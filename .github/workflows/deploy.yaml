@@ -47,5 +47,5 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Docker Build and Push
       run: |
-        docker build -f  ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
+        docker build -f  ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
