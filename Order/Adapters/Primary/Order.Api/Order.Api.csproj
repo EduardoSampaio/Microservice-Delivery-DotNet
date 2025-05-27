@@ -3,7 +3,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>69d0ed24-988a-4482-8d2a-328e0cd30c51</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Order.Application\Order.Application.csproj" />
     <ProjectReference Include="..\..\..\Core\Order.Domain\Order.Domain.csproj" />

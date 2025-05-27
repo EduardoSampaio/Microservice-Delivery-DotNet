@@ -49,7 +49,7 @@ jobs:
       run: |
         docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
-    - name: Docker Build and Push Catalog
+    - name: Docker Build and Push Order
       run: |
         docker build -f ./Order/Adapters/Primary/Order.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-order:latest .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-order
