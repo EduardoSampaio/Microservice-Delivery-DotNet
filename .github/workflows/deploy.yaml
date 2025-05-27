@@ -17,8 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore dependencies Catalog
+      run: dotnet restore Catalog/Presentation/Catalog.Api/Catalog.Api.csproj
       
   test:
     runs-on: ubuntu-latest
@@ -29,9 +29,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Restore dependencies
+      - name: Restore dependencies Catalog
         run: dotnet restore
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build Catalog/Presentation/Catalog.Api/Catalog.Api.csproj --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test Catalog/Presentation/Catalog.Api/Catalog.Api.csproj --no-restore --verbosity normal
