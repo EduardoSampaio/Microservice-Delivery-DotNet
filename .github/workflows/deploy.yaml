@@ -52,15 +52,20 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Generate tag
+      id: generate_tag
+      run: |
+         SHA=$(echo $GITHUB_SHA | head -c7)
+         echo "sha=$SHA" >> $GITHUB_OUTPUT
     - name: Docker Build and Push Catalog
       run: |
-        docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest .
+        docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{steps.generate_tag.outputs.sha }} .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
     - name: Docker Build and Push Order
       run: |
-        docker build -f ./Order/Adapters/Primary/Order.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-order:latest .
+        docker build -f ./Order/Adapters/Primary/Order.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-order:${{ steps.generate_tag.outputs.sha }} .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-order
     - name: Docker Build and Push Gateway
       run: |
-        docker build -f ./Gateway/Gateway.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:latest .
+        docker build -f ./Gateway/Gateway.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:${{ steps.generate_tag.outputs.sha }} .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-gateway
