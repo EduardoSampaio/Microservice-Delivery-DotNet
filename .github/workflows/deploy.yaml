@@ -59,7 +59,7 @@ jobs:
          echo "sha=$SHA" >> $GITHUB_OUTPUT
     - name: Docker Build and Push Catalog
       run: |
-        docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{steps.generate_tag.outputs.sha }} .
+        docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{ steps.generate_tag.outputs.sha }} .
         docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
     - name: Docker Build and Push Order
       run: |
