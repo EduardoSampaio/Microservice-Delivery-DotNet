@@ -13,8 +13,8 @@ public class BasketCheckout: IEntity
         AssertionConcern.AssertArgumentNotNull(customer, nameof(customer));
         AssertionConcern.AssertArgumentNotNull(payment, nameof(payment));
         AssertionConcern.AssertArgumentNotNull(address, nameof(address));
-        AssertionConcern.AssertArgumentNotNull(shoppingCartId, nameof(shoppingCartId));
-        AssertionConcern.AssertArgumentNotEmpty(shoppingCartId, nameof(shoppingCartId));
+        AssertionConcern.AssertArgumentNotNull(shoppingCartId!, nameof(shoppingCartId));
+        AssertionConcern.AssertArgumentNotEmpty(shoppingCartId!, nameof(shoppingCartId));
 
         Customer = customer;
         Payment = payment;

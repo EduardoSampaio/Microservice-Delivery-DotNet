@@ -37,15 +37,15 @@ public class ErrorHandlingMiddleware(RequestDelegate next)
             {
                 case EntityNotFoundException ne:
                     response.StatusCode = (int)ne.StatusCode;
-                    responseWrapper.Messages = ne.ErrorMessages;
+                    responseWrapper.Messages = ne.ErrorMessages!;
                     break;
                 case ForbiddenException fe:
                     response.StatusCode = (int)fe.StatusCode;
-                    responseWrapper.Messages = fe.ErrorMessages;
+                    responseWrapper.Messages = fe.ErrorMessages!;
                     break;
                 case UnauthorizedException ue:
                     response.StatusCode = (int)ue.StatusCode;
-                    responseWrapper.Messages = ue.ErrorMessages;
+                    responseWrapper.Messages = ue.ErrorMessages!;
                     break;
                 default:
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;

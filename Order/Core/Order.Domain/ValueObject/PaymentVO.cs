@@ -31,9 +31,9 @@ public sealed class PaymentVO : IValueObject, IEquatable<PaymentVO>
         {
             return true;
         }
-        return CardNumber.Equals(other.CardNumber);
+        return CardNumber!.Equals(other.CardNumber);
     }
-    public override int GetHashCode() => CardNumber.GetHashCode();
+    public override int GetHashCode() => CardNumber!.GetHashCode();
     public static bool operator ==(PaymentVO? left, PaymentVO? right)
     {
         if (left is null && right is null)
