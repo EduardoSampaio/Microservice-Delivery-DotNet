@@ -11,6 +11,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Packages.props", "."]
 COPY ["Catalog/Presentation/Catalog.Api/Catalog.Api.csproj", "Catalog/Presentation/Catalog.Api/"]
 COPY ["Shared/BuildingBlocks/BuildingBlocks.csproj", "Shared/BuildingBlocks/"]
 COPY ["Catalog/Core/Catalog.Application/Catalog.Application.csproj", "Catalog/Core/Catalog.Application/"]
