@@ -60,12 +60,12 @@ jobs:
     - name: Docker Build and Push Catalog
       run: |
         docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{ steps.generate_tag.outputs.sha }} .
-        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{ steps.generate_tag.outputs.sha }}
     - name: Docker Build and Push Order
       run: |
         docker build -f ./Order/Adapters/Primary/Order.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-order:${{ steps.generate_tag.outputs.sha }} .
-        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-order
+        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-order:${{ steps.generate_tag.outputs.sha }}
     - name: Docker Build and Push Gateway
       run: |
         docker build -f ./Gateway/Gateway.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:${{ steps.generate_tag.outputs.sha }} .
-        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-gateway
+        docker push ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:${{ steps.generate_tag.outputs.sha }}
