@@ -16,7 +16,7 @@ namespace Catalog.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Catalog")
+                .HasDefaultSchema("CatalogService")
                 .HasAnnotation("ProductVersion", "9.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -40,7 +40,7 @@ namespace Catalog.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", "Catalog");
+                    b.ToTable("Categories", "CatalogService");
                 });
 
             modelBuilder.Entity("Catalog.Entities.Product", b =>
@@ -71,7 +71,7 @@ namespace Catalog.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", "Catalog");
+                    b.ToTable("Products", "CatalogService");
                 });
 
             modelBuilder.Entity("Catalog.Entities.Product", b =>

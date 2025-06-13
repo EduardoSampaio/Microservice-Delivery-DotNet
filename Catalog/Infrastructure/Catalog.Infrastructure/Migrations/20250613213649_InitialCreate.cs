@@ -12,11 +12,11 @@ namespace Catalog.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Catalog");
+                name: "CatalogService");
 
             migrationBuilder.CreateTable(
                 name: "Categories",
-                schema: "Catalog",
+                schema: "CatalogService",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -31,7 +31,7 @@ namespace Catalog.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Products",
-                schema: "Catalog",
+                schema: "CatalogService",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -48,7 +48,7 @@ namespace Catalog.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalSchema: "Catalog",
+                        principalSchema: "CatalogService",
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -56,7 +56,7 @@ namespace Catalog.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
-                schema: "Catalog",
+                schema: "CatalogService",
                 table: "Products",
                 column: "CategoryId");
         }
@@ -66,11 +66,11 @@ namespace Catalog.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Products",
-                schema: "Catalog");
+                schema: "CatalogService");
 
             migrationBuilder.DropTable(
                 name: "Categories",
-                schema: "Catalog");
+                schema: "CatalogService");
         }
     }
 }
