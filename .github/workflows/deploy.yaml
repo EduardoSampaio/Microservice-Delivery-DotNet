@@ -42,7 +42,7 @@ jobs:
       - name: Test
         run: dotnet test MicroserviceDeliveryAPP.sln --no-restore --verbosity normal
 
-  docker:
+  containerize:
     needs: [build, test]
     runs-on: ubuntu-latest
     steps:
@@ -57,18 +57,6 @@ jobs:
       run: |
          SHA=$(echo $GITHUB_SHA | head -c7)
          echo "sha=$SHA" >> $GITHUB_OUTPUT
-    # - name: Docker Build and Push Catalog
-    #   run: |
-    #     docker build -f ./Catalog/Presentation/Catalog.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{ steps.generate_tag.outputs.sha }} .
-    #     docker push ${{ secrets.DOCKER_USERNAME }}/microservice-catalog:${{ steps.generate_tag.outputs.sha }}
-    # - name: Docker Build and Push Order
-    #   run: |
-    #     docker build -f ./Order/Adapters/Primary/Order.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-order:${{ steps.generate_tag.outputs.sha }} .
-    #     docker push ${{ secrets.DOCKER_USERNAME }}/microservice-order:${{ steps.generate_tag.outputs.sha }}
-    # - name: Docker Build and Push Gateway
-    #   run: |
-    #     docker build -f ./Gateway/Gateway.Api/Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:${{ steps.generate_tag.outputs.sha }} .
-    #     docker push ${{ secrets.DOCKER_USERNAME }}/microservice-gateway:${{ steps.generate_tag.outputs.sha }}
 
     - name: Build and Push Catalog
       uses: docker/build-push-action@v5
